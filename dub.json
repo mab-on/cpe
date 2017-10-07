@@ -1,0 +1,9 @@
+{
+	"name": "cpe",
+	"authors": ["Martin Brzenska"],
+	"dependencies": {"libdominator": "==1.1.5"},
+	"targetType": "executable",
+	"description": "CPE client (TR-064)",
+	"copyright": "Copyright © 2017, Martin Brzenska",
+	"license": "MIT"
+}
