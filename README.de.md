@@ -31,7 +31,8 @@ Ein Profil umfasst die Adresse des CPE, evtl. Zugangsdaten und puffert eine List
 	
 ## Anwendungsbeispiel
 #### Scan von kompatiblen Geräten im LAN
->❯ cpe scan	
+```sh
+❯ cpe scan	
 HTTP/1.1 200 OK
 LOCATION: http://192.168.178.1:49000/tr64desc.xml
 SERVER: FRITZ!Box 6360 Cable (um) UPnP/1.0 AVM FRITZ!Box 6360 Cable (um) 85.06.52
@@ -39,18 +40,22 @@ CACHE-CONTROL: max-age=1800
 EXT:
 ST: urn:dslforum-org:device:InternetGatewayDevice:1
 USN: uuid:XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX::urn:dslforum-org:device:InternetGatewayDevice:1
-
+```
 #### Anlegen eines Profils
->❯ cpe profile add --cpe http://192.168.178.1:49000/tr64desc.xml --name demoprofile --user admin --password gurkensalat
-
+```sh
+❯ cpe profile add --cpe http://192.168.178.1:49000/tr64desc.xml --name demoprofile --user admin --password gurkensalat
+```
 #### Auflisten der verfügbaren Funktionen (Services, Actions, Parameter)
 - Komplette Liste:
-> ❯ cpe list --profile demoprofile
+```sh
+❯ cpe list --profile demoprofile
+```
+
+- Oder Schritt für Schritt
 	
-	Oder Schritt für Schritt
-	
-- Ausgabe der verfügbaren Services
->❯ cpe list --profile demoprofile -q
+Ausgabe der verfügbaren Services
+```sh
+❯ cpe list --profile demoprofile -q
 serviceType: urn:dslforum-org:service:DeviceInfo:1
 serviceType: urn:dslforum-org:service:DeviceConfig:1
 serviceType: urn:dslforum-org:service:Layer3Forwarding:1
@@ -83,9 +88,11 @@ serviceType: urn:dslforum-org:service:WANDSLLinkConfig:1
 serviceType: urn:dslforum-org:service:WANEthernetLinkConfig:1
 serviceType: urn:dslforum-org:service:WANPPPConnection:1
 serviceType: urn:dslforum-org:service:WANIPConnection:1
+```
 
-- Ausgabe der verfügbaren Actions eines ausgewählten Services
->❯ cpe list --profile home -S "urn:dslforum-org:service:WLANConfiguration:1" -n
+Ausgabe der verfügbaren Actions eines ausgewählten Services
+```sh
+❯ cpe list --profile home -S "urn:dslforum-org:service:WLANConfiguration:1" -n
 serviceType: urn:dslforum-org:service:WLANConfiguration:1
 	Action: SetEnable
 	Action: GetInfo
@@ -120,24 +127,29 @@ serviceType: urn:dslforum-org:service:WLANConfiguration:1
 	Action: X_AVM-DE_GetWLANExtInfo
 	Action: X_AVM-DE_GetWPSInfo
 	Action: X_AVM-DE_SetWPSConfig
+```
 
 #### Aufruf einer ausgewählten Action
->❯ cpe call --profile home -S "urn:dslforum-org:service:WLANConfiguration:1" -A GetSSID
+```sh
+❯ cpe call --profile home -S "urn:dslforum-org:service:WLANConfiguration:1" -A GetSSID
 relatedStateVariable:	SSID
 value:	Brezel
 name:	NewSSID
 direction:	out
+```
 
 #### Aufruf einer ausgewählten Action mit Definition von Input Parameter
-- zuerst müssen die input parameter "in" in Erfahrung gebracht werden:
->❯ cpe list --profile home -S "urn:dslforum-org:service:WLANConfiguration:1" -A SetSSID 
+zuerst müssen die input parameter "in" in Erfahrung gebracht werden:
+```sh
+❯ cpe list --profile home -S "urn:dslforum-org:service:WLANConfiguration:1" -A SetSSID 
 serviceType: urn:dslforum-org:service:WLANConfiguration:1
 	Action: SetSSID
 	Params:
 	in string SSID
-
-- Anschließend Aufruf
->❯ cpe call --profile home -S "urn:dslforum-org:service:WLANConfiguration:1" -A SetSSID -i "SSID=MyWifi"
- 
+```
+ Anschließend Aufruf
+```sh
+❯ cpe call --profile home -S "urn:dslforum-org:service:WLANConfiguration:1" -A SetSSID -i "SSID=MyWifi"
+``` 
 
 	
