@@ -1,4 +1,4 @@
-# CPE Client (TR-064) für die Kommandozeile
+# CPE client (TR-064) for the command line
 
 ## Intro
 "CPE" is the short form for "Customer Premises Equipment". The CPE is located in the area local network of a subscriber (or user) and can be a combined device that the user uses to access the Internet (e.g. a DSL modem), to manage his telephones (e.g. a DECT station), to connect devices in the local network, etc. The manufacturer often provides software with which the user can retrieve information about the state of the various services on the CPE or change settings. The application communicates with the CPE through a particular protocol, e.g. "TR-064".
@@ -9,22 +9,22 @@ A command line application to read and execute functions that a CPE provides. Th
 ## Terms of use
 #### Components
 
-- cpe scan 
+- `cpe scan`
 Scan and list TR-064 capable devices in LAN
 
-- cpe list
+- `cpe list`
 List functions (Service, Action, Parameter), that the cpe provides
 
-- cpe call
+- `cpe call`
 Calling a function (or service action) provided by the CPE
 
-- cpe profile
+- `cpe profile` 
 Management of profiles. Profiles are a construct of this application to simplify operation and to speed up execution.
 A profile includes the address of the CPE, possibly credentials, and buffers a list of the known functions (services, actions, parameters) of a CPE.
-	- cpe profile add
+	- `cpe profile add`
 	Adds a profile
 	
-	- cpe profile list
+	- `cpe profile list`
 	Lists known profiles
 	
 Note, that all components do provide the --help parameter
