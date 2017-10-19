@@ -10,11 +10,11 @@ Eine Komandozeilen Anwendung um Funktionen, die ein CPE bereitstellt, auszulesen
 
 ## Nutzungshinweise
 #### Installation
-Derzeit muss die Anwendung manuell kompiliert und installiert werden - es  wird noch keine automatisierter Installation bereitgestellt.
+Derzeit muss die Anwendung manuell kompiliert und installiert werden - es  wird noch keine automatisierte Installation bereitgestellt.
 
 [1]: http://code.dlang.org/download
 Die Kompilierung ist komfortabel mit dem Tool [dub][1] möglich. 
-Nach der installation von [dub][1] wird mit dem folgenden Befehlen die ausführbare datei erzeut:  
+Nach der installation von [dub][1] wird mit dem folgenden Befehlen die ausführbare Datei erzeugt:  
 
 *(Beispiel auf einem GNU/Linux System)*
 ```sh
@@ -23,7 +23,7 @@ git clone https://github.com/mab-on/cpe.git
 cd ./cpe
 dub build -b release
 ```
-Eine ausführbare Datei `cpe` sollte erstellt worden sein, die bei Bedarf nach *PATH* verschoben werden kann.
+Eine ausführbare Datei `cpe` sollte erstellt worden sein, die bei Bedarf nach *PATH* verschoben werden kann. Nach dem Verschieben kann `./cpe` wieder entfernt werden.
 
 #### Komponenten
 - `cpe scan`  
