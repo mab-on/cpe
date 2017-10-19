@@ -9,26 +9,41 @@ Oft stellt der Hersteller eines CPE Software bereit, mit dessen Hilfe der Anwend
 Eine Komandozeilen Anwendung um Funktionen, die ein CPE bereitstellt, auszulesen und auszuführen. Voraussetzung ist, dass das CPE TR-064 fähig ist.
 
 ## Nutzungshinweise
-#### Komponenten
+#### Installation
+Derzeit muss die Anwendung manuell kompiliert und installiert werden - es  wird noch keine automatisierter Installation bereitgestellt.
 
-- cpe scan 
+[1]: http://code.dlang.org/download
+Die Kompilierung ist komfortabel mit dem Tool [dub][1] möglich. 
+Nach der installation von [dub][1] wird mit dem folgenden Befehlen die ausführbare datei erzeut:  
+
+*(Beispiel auf einem GNU/Linux System)*
+```sh
+cd ~
+git clone https://github.com/mab-on/cpe.git
+cd ./cpe
+dub build -b release
+```
+Eine ausführbare Datei `cpe` sollte erstellt worden sein, die bei Bedarf nach *PATH* verschoben werden kann.
+
+#### Komponenten
+- `cpe scan`  
 Scan und Auflistung der TR-064 fähigen Geräte im LAN
 
-- cpe list
+- `cpe list`  
 Ausgabe/Durchsuchung der vom CPE bereitgestellten Funktionen (Service, Action, Parameter)
 
-- cpe call
+- `cpe call`  
 Aufruf einer vom CPE bertgestellten Funktion (bzw. Service-Action)
 
-- cpe profile
+- `cpe profile`  
 Verwaltung von Profilen. Profile sind ein Konstrukt dieser Anwendung um die Bedienung zu vereinfachen und die Ausführung zu beschleunigen. 
 Ein Profil umfasst die Adresse des CPE, evtl. Zugangsdaten und puffert eine Liste mit den bekannten Funktionen (Services , Actions , Parameter) eines CPE.
-	- cpe profile add
+	- `cpe profile add`  
 	Hinzufügen von Profilen
 	
-	- cpe profile list
+	- `cpe profile list`  
 	Auflisten von bekannten Profilen
-	
+
 ## Anwendungsbeispiel
 #### Scan von kompatiblen Geräten im LAN
 ```sh
@@ -46,12 +61,12 @@ USN: uuid:XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX::urn:dslforum-org:device:Internet
 ❯ cpe profile add --cpe http://192.168.178.1:49000/tr64desc.xml --name demoprofile --user admin --password gurkensalat
 ```
 #### Auflisten der verfügbaren Funktionen (Services, Actions, Parameter)
-- Komplette Liste:
+Eine komplette Liste wird wie folgt abgefragt
 ```sh
 ❯ cpe list --profile demoprofile
 ```
-
-- Oder Schritt für Schritt
+  
+Weil die komplette Liste unhaldlich sein kann, ist es möglich `cpe list` zu filtern
 	
 Ausgabe der verfügbaren Services
 ```sh
@@ -92,7 +107,7 @@ serviceType: urn:dslforum-org:service:WANIPConnection:1
 
 Ausgabe der verfügbaren Actions eines ausgewählten Services
 ```sh
-❯ cpe list --profile home -S "urn:dslforum-org:service:WLANConfiguration:1" -n
+❯ cpe list --profile demoprofile -S "urn:dslforum-org:service:WLANConfiguration:1" -n
 serviceType: urn:dslforum-org:service:WLANConfiguration:1
 	Action: SetEnable
 	Action: GetInfo
@@ -131,7 +146,7 @@ serviceType: urn:dslforum-org:service:WLANConfiguration:1
 
 #### Aufruf einer ausgewählten Action
 ```sh
-❯ cpe call --profile home -S "urn:dslforum-org:service:WLANConfiguration:1" -A GetSSID
+❯ cpe call --profile demoprofile -S "urn:dslforum-org:service:WLANConfiguration:1" -A GetSSID
 relatedStateVariable:	SSID
 value:	Brezel
 name:	NewSSID
@@ -141,15 +156,15 @@ direction:	out
 #### Aufruf einer ausgewählten Action mit Definition von Input Parameter
 zuerst müssen die input parameter "in" in Erfahrung gebracht werden:
 ```sh
-❯ cpe list --profile home -S "urn:dslforum-org:service:WLANConfiguration:1" -A SetSSID 
+❯ cpe list --profile demoprofile -S "urn:dslforum-org:service:WLANConfiguration:1" -A SetSSID 
 serviceType: urn:dslforum-org:service:WLANConfiguration:1
 	Action: SetSSID
 	Params:
 	in string SSID
 ```
- Anschließend Aufruf
+...und Aufruf:
 ```sh
-❯ cpe call --profile home -S "urn:dslforum-org:service:WLANConfiguration:1" -A SetSSID -i "SSID=MyWifi"
+❯ cpe call --profile demoprofile -S "urn:dslforum-org:service:WLANConfiguration:1" -A SetSSID -i "SSID=MyWifi"
 ``` 
 
 	
