@@ -4,27 +4,44 @@
 "CPE" is the short form for "Customer Premises Equipment". The CPE is located in the area local network of a subscriber (or user) and can be a combined device that the user uses to access the Internet (e.g. a DSL modem), to manage his telephones (e.g. a DECT station), to connect devices in the local network, etc. The manufacturer often provides software with which the user can retrieve information about the state of the various services on the CPE or change settings. The application communicates with the CPE through a particular protocol, e.g. "TR-064".
 
 ## What is this about?
-A command line application to read and execute functions that a CPE provides. The prerequisite is that the CPE is TR-064 capable.
+A command line application to read and execute functions that a CPE provides. The prerequisite is that the CPE is TR-064 capable.  
+
+[1]: http://code.dlang.org/download
+The compilation is possible with the tool [dub] [1].
+After installing [dub] [1], the executable file is created with the following commands:
+
+*(Example for a GNU/Linux System)*
+```sh
+cd ~
+git clone https://github.com/mab-on/cpe.git
+cd ./cpe
+dub build -b release
+```
+An executable file `cpe` should have been created, which can be moved to *PATH* if necessary. After moving the binary to *PATH*, the cloned `./cpe` directory can be removed again.
 
 ## Terms of use
+#### Installation
+Currently, the application must be manually compiled and installed - an automated installation is not available, yet.
+
+
 #### Components
 
-- `cpe scan`
+- `cpe scan`  
 Scan and list TR-064 capable devices in LAN
 
-- `cpe list`
+- `cpe list`  
 List functions (Service, Action, Parameter), that the cpe provides
 
-- `cpe call`
-Calling a function (or service action) provided by the CPE
+- `cpe call`  
+Call a function (or service action) provided by the CPE
 
-- `cpe profile` 
+- `cpe profile`  
 Management of profiles. Profiles are a construct of this application to simplify operation and to speed up execution.
 A profile includes the address of the CPE, possibly credentials, and buffers a list of the known functions (services, actions, parameters) of a CPE.
-	- `cpe profile add`
+	- `cpe profile add`  
 	Adds a profile
 	
-	- `cpe profile list`
+	- `cpe profile list`  
 	Lists known profiles
 	
 Note, that all components do provide the --help parameter
