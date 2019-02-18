@@ -1,7 +1,7 @@
 module libcpe.core;
 
 public import std.digest.md;
-public import std.digest.digest : toHexString;
+public import std.digest : toHexString;
 import std.stdio; //remove after debuging
 import std.json;
 
@@ -625,6 +625,8 @@ Service[] load_services(Location device_desc_location)
         case "scpdurl":
           service.SCPDURL = dom.getInner( serviceItem );
           service.scpd_location.path = service.SCPDURL;
+          break;
+
         default:
           break;
       }
