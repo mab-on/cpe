@@ -20,11 +20,11 @@ struct SecurityToken
 
 	bool complete()
 	{
-		return 
-			user.length 
-		&&	pwd.length 
-		&&	auth.length 
-		&&	realm.length 
+		return
+			user.length
+		&&	pwd.length
+		&&	auth.length
+		&&	realm.length
 		&&	nonce.length;
 	}
 
@@ -33,15 +33,15 @@ struct SecurityToken
 		user = user.init;
 		pwd = pwd.init;
 		auth = auth.init;
-		realm = realm.init; 
+		realm = realm.init;
 		nonce = nonce.init;
 	}
 
 	bool wantsChallenge()
 	{
-		return 
-			user.length 
-		&&	pwd.length 
+		return
+			user.length
+		&&	pwd.length
 		&&	! realm.length
 		&&	! auth.length
 		&&	! nonce.length;
@@ -49,7 +49,7 @@ struct SecurityToken
 
 	/**
 	* Sets the state ready for .wantsChallenge
-	* 
+	*
 	* TODO: throw if user,pwd and realm are not set, because for .wantsChallenge to be true these attributes must be loaded
 	*/
 	void setWantsChallenge()
@@ -156,7 +156,7 @@ string content_level_authentication_challenge(SecurityToken token)
 
 }
 unittest
-{	
+{
   SecurityToken token;
   token.user = "admin";
   token.pwd = "gurkensalat";
@@ -349,7 +349,7 @@ Argument[] call( Location cpe , Service service , Action action , SecurityToken 
   import std.uni : icmp;
   import libcpe.soaplike;
   import libdominator;
-  
+
 	Argument[] result;
 
 	if( _requests <= 0 ) { return result; }
@@ -366,8 +366,8 @@ Argument[] call( Location cpe , Service service , Action action , SecurityToken 
 
 	if(token.complete)
 	{
-		msg.header	
-		.add( 
+		msg.header
+		.add(
 			Element("ClientAuth")
 			.addAttribute( libcpe.soaplike.Attribute( "xmlns:h", "http://soap-authentication.org/digest/2001/10/" ))
 			.addAttribute( libcpe.soaplike.Attribute( "mustUnderstand", "1" ))
@@ -380,7 +380,7 @@ Argument[] call( Location cpe , Service service , Action action , SecurityToken 
   	else if(token.wantsChallenge)
   	{
 		msg.header
-	    .add( 
+	    .add(
 	    	Element("InitChallenge")
 			.addAttribute( libcpe.soaplike.Attribute( "xmlns:h", "http://soap-authentication.org/digest/2001/10/" ))
 			.addAttribute( libcpe.soaplike.Attribute( "mustUnderstand", "1" ))
@@ -397,7 +397,7 @@ Argument[] call( Location cpe , Service service , Action action , SecurityToken 
 	~"USER-AGENT: "~ "TODO" ~"\r\n"
 	~"\r\n"
 	~ msg.toString;
-	
+
 	char[] header;
   char[] buf;
   buf.length = 1;
@@ -429,8 +429,8 @@ Argument[] call( Location cpe , Service service , Action action , SecurityToken 
 			 return call(cpe , service , action , token , --_requests);
 		}
   }
-	
-	auto dom = new Dominator(buf.to!string);	
+
+	auto dom = new Dominator(buf.to!string);
 	foreach( Argument arg ; action.argumentList.filter!(arg => arg.direction == "out") )
   {
     foreach(Node node ; dom.filterDom(arg.name) )
@@ -454,7 +454,7 @@ Argument[] call( Location cpe , Service service , Action action , SecurityToken 
 		token.auth = content_level_authentication_challenge(token);
 		return call(cpe , service , action , token , --_requests);
 	}
-  
+
   return result;
 }
 
@@ -462,15 +462,15 @@ struct Action
 {
   string name;
   Argument[] argumentList;
-	
+
   JSONValue serialize()
   {
   	import std.algorithm : map;
 		import std.array;
-		
+
   	JSONValue result = JSONValue(["name":name]);
 		result.object["argumentList"] = this.argumentList.map!( a => a.serialize() ).array;
-  	
+
   	return result;
   }
 
@@ -494,7 +494,7 @@ struct Argument
 
   JSONValue serialize()
   {
-  	return JSONValue([ 
+  	return JSONValue([
   	"name": name,
   	"direction": direction,
   	"relatedStateVariable": relatedStateVariable,
@@ -552,7 +552,7 @@ struct Service
   {
   	import std.algorithm : map;
 		import std.array;
-		
+
   	JSONValue result = JSONValue([
   		"serviceType":serviceType,
   		"serviceId":serviceId,
