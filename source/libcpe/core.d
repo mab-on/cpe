@@ -257,7 +257,9 @@ string[] http_header_byLine(T)(in T content_with_header)
   import std.algorithm.searching : countUntil;
   import std.array : split;
   import std.conv : to;
-  return content_with_header[0..content_with_header.countUntil("\r\n\r\n")].to!string.split("\r\n");
+  return content_with_header.length > 0
+  	? content_with_header[0..content_with_header.countUntil("\r\n\r\n")].to!string.split("\r\n")
+  	: [];
 }
 
 string http_header_value(in string[] header , string field)
