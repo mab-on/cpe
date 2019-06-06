@@ -1,14 +1,14 @@
 # CPE client (TR-064) for the command line
 
 ## Intro
-"CPE" is the short form for "Customer Premises Equipment". The CPE is located in the area local network of a subscriber (or user) and can be a combined device that the user uses to access the Internet (e.g. a DSL modem), to manage his telephones (e.g. a DECT station), to connect devices in the local network, etc. The manufacturer often provides software with which the user can retrieve information about the state of the various services on the CPE or change settings. The application communicates with the CPE through a particular protocol, e.g. "TR-064".
+"CPE" is the short form for "Customer Premises Equipment". The CPE is located in the local area network of a subscriber (or user or customer) and can be a combined device. Usealy it has the function to access the Internet (e.g. a DSL modem), to manage telephones (e.g. as a DECT station), to connect devices in the local network, etc. The manufacturer of a CPE often provides software, in form of an application, with which a user can retrieve information about the state of the various services on the CPE or change settings. Such an application exchanges information with the CPE by a particular protocol - e.g. "TR-064".
 
 ## What is this about?
-A command line application to read and execute functions that a CPE provides. The prerequisite is that the CPE is TR-064 capable.  
+A command line application to read/write data and execute functions that a CPE provides. 
+To do so, it is required for the CPE to be capable of TR-064.
 
 [1]: http://code.dlang.org/download
-The compilation is possible with the tool [dub] [1].
-After installing [dub] [1], the executable file is created with the following commands:
+It is recommended to use the tool [dub] [1] to compile the app:
 
 *(Example for a GNU/Linux System)*
 ```sh
@@ -17,7 +17,7 @@ git clone https://github.com/mab-on/cpe.git
 cd ./cpe
 dub build -b release
 ```
-An executable file `cpe` should have been created, which can be moved to *PATH* if necessary. After moving the binary to *PATH*, the cloned `./cpe` directory can be removed again.
+An executable file `cpe` will be the result, which can be moved to *PATH* if necessary. After moving the binary to *PATH*, the cloned `./cpe` directory can be removed.
 
 ## Terms of use
 #### Installation
@@ -37,7 +37,7 @@ Call a function (or service action) provided by the CPE
 
 - `cpe profile`  
 Management of profiles. Profiles are a construct of this application to simplify operation and to speed up execution.
-A profile includes the address of the CPE, possibly credentials, and buffers a list of the known functions (services, actions, parameters) of a CPE.
+A profile includes the address of the CPE, credentials (if needed) and a list of the known functions (services, actions, parameters) of a CPE.
 	- `cpe profile add`  
 	Adds a profile
 	
@@ -45,6 +45,7 @@ A profile includes the address of the CPE, possibly credentials, and buffers a l
 	Lists known profiles
 	
 Note, that all components do provide the --help parameter
+
 ## Applicationexample
 #### Scan of compatible devices in the LAN
 ```sh
