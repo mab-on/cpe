@@ -4,11 +4,12 @@
 [2]: https://dlang.org/
 
 ## Intro
-"CPE" is the short form for "Customer Premises Equipment". The CPE is located in the area local network of its owner. It can be a combined device that is used to access the Internet (e.g. a DSL modem), to manage telephones (e.g. a DECT station), to connect devices in the local network, etc. The manufacturer often provides software with which the user can retrieve information about the state of the various services on the CPE or change settings. The application communicates with the CPE by using a particular protocol, e.g. "TR-064".
+"CPE" - "Customer Premises Equipment". 
+The CPE is located in the local area network of its owner. It can be a combined device that is used to access the Internet (e.g. a DSL modem), to manage telephones (e.g. a DECT station) etc. The manufacturer often provides software with which a user can retrieve information about the state of the various services on the CPE and change its settings. Such software communicates with the CPE by using a particular protocol, e.g. "TR-064".
 
 ## What is this about?
-A Client for TR-064 capable devices(CPEs), to read and write settings and execute functions.
-This repository contains implementation of two things:
+This repository provides a client for TR-064 capable devices(CPEs), to read & write settings and execute functions.
+it contains:
 - A library for the programming language [D][2]
 - A command line application
 
