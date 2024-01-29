@@ -320,7 +320,7 @@ struct MAC
 
   string toString()
   {
-    import std.digest.digest;
+    import std.digest;
     import std.algorithm : map;
     import std.array : join;
     import std.format;
